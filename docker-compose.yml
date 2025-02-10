@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  app:
+    image: mintam141/miminiverse-app:latest
+    ports:
+      - "3000:3000"
+    restart: always
