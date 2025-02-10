@@ -53,24 +53,24 @@ export default function Home() {
             <nav className="mb-12">
               <ul className="space-y-4"></ul>
             </nav>
-            <h2 className="text-xl font-bold mb-4">
+            <h2 className="text-5xl  mb-4">
               Next.js, React, React Native (React CLI and Expo), Vite, Redux
               Toolkit
             </h2>
-            <h2 className="text-xl font-bold mb-4">
+            <h2 className="text-5xl mb-4">
               Node.js, Express, Koa (Strapi)
             </h2>
-            <h2 className="text-xl font-bold mb-4">Python, Django</h2>
+            <h2 className="text-5xl mb-4">Python, Django</h2>
             <br></br>
-            <h3 className="text-l mb-4">
+            <h3 className="text-5xl mb-4">
               Database & Storage: MongoDB, Redis, AWS S3, Cloudinary
             </h3>
-            <h3 className="text-l mb-4">Real-time: Websocket | SocketIO</h3>
-            <h3 className="text-l mb-4">API testing: Postman, Chai</h3>
-            <h3 className="text-l mb-4">
+            <h3 className="text-5xl mb-4">Real-time: Websocket | SocketIO</h3>
+            <h3 className="text-5xl mb-4">API testing: Postman, Chai</h3>
+            <h3 className="text-5xl mb-4">
               Authentication: OAuth, Passport, Authjs
             </h3>
-            <h3 className="text-l mb-4">
+            <h3 className="text-5xl mb-4">
               BullMQ, Redis, Cron jobs, Nodemailer, Swagger
             </h3>
           </div>
@@ -78,7 +78,7 @@ export default function Home() {
 
         {/* Right Section */}
         <div className="col-span-1 flex flex-col justify-start items-end text-right p-8">
-          <h1 className="text-3xl font-bold mb-4 text-yellow-300">Miminiverse</h1>
+          <h1 className="font-chalk text-6xl font-bold mb-4 text-yellow-300">Miminiverse</h1>
           <TypeAnimation
             sequence={[
               "Builder ()",
@@ -91,11 +91,15 @@ export default function Home() {
             ]}
             cursor={true}
             repeat={Infinity}
-            style={{ fontSize: "1em" }}
+            className="text-4xl"
           />
-          <div className="mt-8">
+          <div className="font-chalk mt-8 text-5xl">
             <p>
-              Hello, I'm Tam. I like programming and love to build cool stuff.
+              Hello, it's Tam.
+            </p>
+            <p>I like programming and love to build cool stuff.
+            </p>
+            <p>
               Happy to connect!
             </p>
           </div>
