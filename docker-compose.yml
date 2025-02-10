@@ -1,8 +1,16 @@
 version: '3.8'
-
 services:
   app:
     image: mintam141/miminiverse-app:latest
+    build:
+      context: .
+      args:
+        BUILD_VERSION: ${BUILD_VERSION:-latest}
     ports:
       - "3000:3000"
     restart: always
+    environment:
+      - BUILD_VERSION=${BUILD_VERSION:-latest}
+    deploy:
+      labels:
+        - "com.centurylinklabs.watchtower.enable=true"
