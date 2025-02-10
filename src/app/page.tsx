@@ -71,7 +71,7 @@ export default function Home() {
               Authentication: OAuth, Passport, Authjs
             </h3>
             <h3 className="text-l mb-4">
-              {/* BullMQ, Redis, Cron jobs, Selenium, BeautifulSoup, Nodemailer, Swagger, */}
+              BullMQ, Redis, Cron jobs, Selenium, BeautifulSoup, Nodemailer, Swagger
             </h3>
           </div>
         </div>
