@@ -1,29 +1,49 @@
-name: Build and Push Docker Image
+name: Docker Build and Deploy
 
 on:
   push:
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v4
-      with:
-        context: .
-        push: true
-        tags: mintam141/miapp:latest
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: |
+            mintam141/miminiverse-app:latest
+            mintam141/miminiverse-app:${{ github.sha }}
+          build-args: |
+            BUILD_DATE=${{ github.sha }}
+
+      - name: Update docker-compose.yml
+        run: |
+          # Add or update timestamp in docker-compose.yml
+          sed -i "s/BUILD_VERSION=.*/BUILD_VERSION=${{ github.sha }}/" docker-compose.yml || echo "BUILD_VERSION=${{ github.sha }}" >> docker-compose.yml
+          
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add docker-compose.yml
+          git commit -m "Update BUILD_VERSION to ${{ github.sha }} [skip ci]" || exit 0
+          git push
